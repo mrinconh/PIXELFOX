@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "enemy")
         {
-            death_sound.Play();
+            //death_sound.Play();
             anim.SetTrigger("die");
             rBody.AddForce(new Vector2(0f, jumpForce));
             rBody.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -82,15 +82,15 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
-        //if (Input.GetAxis("Horizontal") != 0)
-        //{
-        //    anim.SetBool("run", true);
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            anim.SetBool("run", true);
 
-        //}
-        //else
-        //{
-        //    anim.SetBool("run", false);
-        //}
+        }
+        else
+        {
+            anim.SetBool("run", false);
+        }
 
 
 
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         {
             rBody.AddForce(new Vector2(0f, jumpForce));
             isGrounded = false;
-            //anim.SetTrigger("jump");
+            anim.SetTrigger("jump");
         }
     }
 
