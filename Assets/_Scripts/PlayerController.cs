@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rBody;
     private Animator anim;
     private bool isGrounded = false;
+    //private bool isClimbing = false;
     private bool isFacingRight = true;
     public AudioSource death_sound;
 
@@ -39,6 +40,22 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(SetCanvas());
 
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Something Triggered");
+
+        if (collision.gameObject.tag == "ladder")
+        {
+            rBody.GetComponent<Rigidbody2D>().gravityScale = -2f;
+        }
+
+        if (collision.gameObject.tag == "ground")
+        {
+            rBody.GetComponent<Rigidbody2D>().gravityScale = 2f;
+        }
+
     }
 
     IEnumerator SetCanvas()

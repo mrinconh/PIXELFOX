@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraControllerWithBuffer : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private Transform background;
     [Range(1f, 10f)][SerializeField] private float cameraOffsetX = 5f;
     [Range(1f, 10f)][SerializeField] private float cameraOffsetY = 5f;
 
@@ -45,6 +46,7 @@ public class CameraControllerWithBuffer : MonoBehaviour
                 transform.position.z);
         }
 
+        background.transform.position = Vector3.MoveTowards(background.transform.position, new Vector3(transform.position.x, transform.position.y, 10), .03f);
     }
     private void OnDrawGizmos()
     {
