@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.15f;
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private LayerMask whatIsGround;
-    //[SerializeField] private GameObject CanvasFail;
+    [SerializeField] private GameObject CanvasFail;
+    [SerializeField] private GameObject CanvasWin;
     //[SerializeField] private GameObject CanvasIngame;
 
     // private variables
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = false;
     //private bool isClimbing = false;
     private bool isFacingRight = true;
-    public AudioSource death_sound;
+    //public AudioSource death_sound;
 
     void Start()
     {
@@ -56,13 +57,19 @@ public class PlayerController : MonoBehaviour
             rBody.GetComponent<Rigidbody2D>().gravityScale = 2f;
         }
 
+        if (collision.gameObject.tag == "finish")
+        {
+            CanvasWin.SetActive(true);
+        }
+
     }
 
     IEnumerator SetCanvas()
     {
         yield return new WaitForSeconds(2);
 
-        //CanvasFail.SetActive(true);
+        CanvasFail.SetActive(true);
+        
         //CanvasIngame.SetActive(false);        
     }
 
