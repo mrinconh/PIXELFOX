@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rBody;
     private Animator anim;
     private bool isGrounded = false;
+    private bool isClimbing = false;
     //private bool isClimbing = false;
     private bool isFacingRight = true;
     //public AudioSource death_sound;
@@ -49,17 +50,27 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "ladder")
         {
-            rBody.GetComponent<Rigidbody2D>().gravityScale = -2f;
-        }
+            isClimbing = true;
+            rBody.GetComponent<Rigidbody2D>().gravityScale = 0;
 
-        if (collision.gameObject.tag == "ground")
-        {
-            rBody.GetComponent<Rigidbody2D>().gravityScale = 2f;
         }
 
         if (collision.gameObject.tag == "finish")
         {
             CanvasWin.SetActive(true);
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.Log("Something Triggered");
+
+        if (collision.gameObject.tag == "ladder")
+        {
+            isClimbing = false;
+            rBody.GetComponent<Rigidbody2D>().gravityScale = 2;
+
         }
 
     }
@@ -77,6 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = GroundCheck();
         Walk();
+        Climb();
         Jump();
 
     }
@@ -100,7 +112,6 @@ public class PlayerController : MonoBehaviour
         float horiz = Input.GetAxis("Horizontal");
         rBody.velocity = new Vector2(horiz * speed, rBody.velocity.y);
         
-
         if (isFacingRight && rBody.velocity.x < 0 || !isFacingRight && rBody.velocity.x > 0)
         {
             Flip();
@@ -115,9 +126,30 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("run", false);
         }
+    }
 
+    public void Climb()
+    {
+        if (isClimbing == true)
+        {
+            float verti = Input.GetAxis("Vertical");
+            rBody.velocity = new Vector2(rBody.velocity.x, verti * speed);
+        }
 
+        //if (isFacingRight && rBody.velocity.x < 0 || !isFacingRight && rBody.velocity.x > 0)
+        //{
+        //    Flip();
+        //}
 
+        //if (Input.GetAxis("Horizontal") != 0)
+        //{
+        //    anim.SetBool("run", true);
+
+        //}
+        //else
+        //{
+        //    anim.SetBool("run", false);
+        //}
     }
 
     public void Jump()

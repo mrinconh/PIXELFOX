@@ -46,7 +46,7 @@ public class CameraControllerWithBuffer : MonoBehaviour
                 transform.position.z);
         }
 
-        background.transform.position = Vector3.MoveTowards(background.transform.position, new Vector3(transform.position.x, transform.position.y, 10), .03f);
+        background.transform.position = new Vector3(transform.position.x, transform.position.y, 10);//Vector3.MoveTowards(background.transform.position, new Vector3(transform.position.x, transform.position.y, 10), .03f);
     }
     private void OnDrawGizmos()
     {
