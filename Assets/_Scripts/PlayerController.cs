@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using System;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private GameObject CanvasFail;
     [SerializeField] private GameObject CanvasWin;
+
+    [SerializeField] private Text pointText;
+    [SerializeField] private Text hpText;
     //[SerializeField] private GameObject CanvasIngame;
 
     // private variables
@@ -18,28 +24,33 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private bool isGrounded = false;
     private bool isClimbing = false;
-    //private bool isClimbing = false;
     private bool isFacingRight = true;
     //public AudioSource death_sound;
+
+    private int score = 0;
+    public int hp = 3;
 
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
+
+        //text.text = 0;
+        score = Convert.ToInt32(pointText.text);
+        if (Convert.ToInt32(hpText.text) > 0)
+        {
+            hp = Convert.ToInt32(hpText.text);
+        }
+        hpText.text = Convert.ToString(hp);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "enemy")
         {
-            //death_sound.Play();
-            anim.SetTrigger("die");
-            rBody.AddForce(new Vector2(0f, jumpForce));
-            rBody.GetComponent<Rigidbody2D>().gravityScale = 0;
-            GetComponent<PlayerController>().enabled = false;
 
-
-            StartCoroutine(SetCanvas());
+            hp -= 1;
+            hpText.text = Convert.ToString(hp);
 
         }
     }
@@ -47,6 +58,15 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Something Triggered");
+
+        if (collision.gameObject.tag == "Berry")
+        {
+            hp += 1;
+            Debug.Log(hp);
+            Destroy(collision.gameObject);
+            hpText.text = Convert.ToString(hp);
+
+        }
 
         if (collision.gameObject.tag == "ladder")
         {
@@ -58,6 +78,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "finish")
         {
             CanvasWin.SetActive(true);
+        }
+
+        if (collision.gameObject.tag == "Collectable")
+        {
+            score += collision.gameObject.GetComponent<GemScript>().value;
+            Destroy(collision.gameObject);
+            pointText.text = Convert.ToString(score);
         }
 
     }
@@ -79,13 +106,23 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        CanvasFail.SetActive(true);
-        
-        //CanvasIngame.SetActive(false);        
+        CanvasFail.SetActive(true);      
     }
 
     private void FixedUpdate()
     {
+        if (hp == 0)
+        {
+            //death_sound.Play();
+            anim.SetTrigger("die");
+            rBody.AddForce(new Vector2(0f, jumpForce));
+            rBody.GetComponent<Rigidbody2D>().gravityScale = 0;
+            GetComponent<PlayerController>().enabled = false;
+
+
+            StartCoroutine(SetCanvas());
+        }
+
         isGrounded = GroundCheck();
         Walk();
         Climb();
@@ -135,21 +172,6 @@ public class PlayerController : MonoBehaviour
             float verti = Input.GetAxis("Vertical");
             rBody.velocity = new Vector2(rBody.velocity.x, verti * speed);
         }
-
-        //if (isFacingRight && rBody.velocity.x < 0 || !isFacingRight && rBody.velocity.x > 0)
-        //{
-        //    Flip();
-        //}
-
-        //if (Input.GetAxis("Horizontal") != 0)
-        //{
-        //    anim.SetBool("run", true);
-
-        //}
-        //else
-        //{
-        //    anim.SetBool("run", false);
-        //}
     }
 
     public void Jump()
