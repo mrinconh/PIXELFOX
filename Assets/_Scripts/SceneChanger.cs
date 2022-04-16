@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    public void Level4()
+    {
+
+        SceneManager.LoadScene("Level4");
+    }
+
     public void Level3()
     {
 
