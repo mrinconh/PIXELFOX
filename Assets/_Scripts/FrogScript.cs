@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FrogScript : MonoBehaviour
 {
+    [SerializeField] public int value = 10;
+
     private Vector3 startPosition;
 
     public float speed;
