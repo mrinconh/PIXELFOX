@@ -5,49 +5,13 @@ EditorUserSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 4
   m_ConfigSettings:
-    RecentlyUsedSceneGuid-0:
-      value: 005350545304580a555d0d7a14770e154e154d2b297c7e327f2b4e66e0e23269
-      flags: 0
-    RecentlyUsedSceneGuid-1:
-      value: 0606070004560d030f5f592041760e444f161d2b757f756229284d6ab6e4606e
-      flags: 0
-    RecentlyUsedSceneGuid-2:
-      value: 5204520054545803590f0821127a0c4440151c7d7979203279714f61b0b8376f
-      flags: 0
-    RecentlyUsedSceneGuid-3:
-      value: 515250075c0c595e5f5a5e71122159444e4e4a2f7a7d7f602f284d66b4b76661
-      flags: 0
-    RecentlyUsedSceneGuid-4:
-      value: 545707055c530b0a59595a7348750d44144f1a797a70736779791862e7e53539
-      flags: 0
     RecentlyUsedScenePath-0:
-      value: 22424703114646680e0b0227036c7b091a1616151f2b233e2867083debf42d
-      flags: 0
-    RecentlyUsedScenePath-1:
-      value: 22424703114646680e0b0227036c6b15050327192f2d2835633c133af6f9
-      flags: 0
-    RecentlyUsedScenePath-2:
-      value: 22424703114646680e0b0227036c73150012146a7d66333e243d04
-      flags: 0
-    RecentlyUsedScenePath-3:
-      value: 22424703114646680e0b0227036c52151802563f22213229
-      flags: 0
-    RecentlyUsedScenePath-4:
-      value: 22424703114646643e0d092c1530103c13011d266c7968252320092a
-      flags: 0
-    RecentlyUsedScenePath-5:
-      value: 22424703114646643e0d092c1530103c13011d267d66333e243d04
-      flags: 0
-    RecentlyUsedScenePath-6:
-      value: 22424703114646643e0d092c1530103c13011d266c7b68252320092a
-      flags: 0
-    RecentlyUsedScenePath-7:
-      value: 22424703114646643e0d092c1530103c13011d267d68747e38271427fb
-      flags: 0
-    RecentlyUsedScenePath-8:
       value: 22424703114646643e0d092c1530101d13190d6439262f2434
       flags: 0
-    RecentlyUsedScenePath-9:
+    RecentlyUsedScenePath-1:
+      value: 22424703114646643e0d092c1530103c13011d267d66333e243d04
+      flags: 0
+    RecentlyUsedScenePath-2:
       value: 22424703114646643e0d092c1530103c13011d266c7a68252320092a
       flags: 0
     vcSharedLogLevel:

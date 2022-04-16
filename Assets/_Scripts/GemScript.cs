@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class GemScript : MonoBehaviour
 {
+    [SerializeField] public int value = 10;
+
     private Rigidbody2D rBody;
 
-    private float countTime = 0f;
-    private float waitTime = 150f;
+    //private float countTime = 0f;
+    //private float waitTime = 150f;
     private float gravityScale = 0f;
 
     private Vector2 maxPosition;
@@ -25,10 +27,7 @@ public class GemScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        countTime += 1f;
-
-        if (rBody.velocity.magnitude > 1)
+    {if (rBody.velocity.magnitude > 1)
         {
             rBody.velocity = Vector2.ClampMagnitude(rBody.velocity, 1);
         }
@@ -45,16 +44,5 @@ public class GemScript : MonoBehaviour
         {
             rBody.GetComponent<Rigidbody2D>().gravityScale = -gravityScale;
         }
-
-        //if (countTime > waitTime)
-        //{
-        //    Flip();
-        //    countTime = 0f;
-        //}
     }
-
-    //private void Flip()
-    //{
-    //    rBody.GetComponent<Rigidbody2D>().gravityScale *= -1;
-    //}
 }
